@@ -1,0 +1,62 @@
+Table user {
+  id uuid [pk]
+  email varchar(255) [not null, unique]
+  is_active boolean [not null]
+  is_superuser boolean [not null]
+  full_name varchar(255)
+  hashed_password varchar [not null]
+}
+
+Table worklog {
+  id uuid [pk]
+  user_id uuid [not null]
+  title varchar(255) [not null]
+  settled_amount numeric(12,2) [not null]
+  is_active boolean [not null]
+  created_at timestamp [not null]
+}
+
+Table work_segment {
+  id uuid [pk]
+  worklog_id uuid [not null]
+  minutes int [not null]
+  hourly_rate numeric(12,2) [not null]
+  is_active boolean [not null]
+  created_at timestamp [not null]
+}
+
+Table work_adjustment {
+  id uuid [pk]
+  worklog_id uuid [not null]
+  amount numeric(12,2) [not null]
+  reason varchar(255)
+  is_active boolean [not null]
+  created_at timestamp [not null]
+}
+
+Table remittance {
+  id uuid [pk]
+  user_id uuid [not null]
+  period_start date [not null]
+  period_end date [not null]
+  status varchar(20) [not null]
+  total_amount numeric(12,2) [not null]
+  failure_reason varchar(255)
+  created_at timestamp [not null]
+  processed_at timestamp
+}
+
+Table remittance_line {
+  id uuid [pk]
+  remittance_id uuid [not null]
+  worklog_id uuid [not null]
+  amount numeric(12,2) [not null]
+  created_at timestamp [not null]
+}
+
+Ref: worklog.user_id > user.id
+Ref: work_segment.worklog_id > worklog.id
+Ref: work_adjustment.worklog_id > worklog.id
+Ref: remittance.user_id > user.id
+Ref: remittance_line.remittance_id > remittance.id
+Ref: remittance_line.worklog_id > worklog.id

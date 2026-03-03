@@ -1,0 +1,38 @@
+{
+  "/api/v1/list-all-worklogs?remittanceStatus=UNREMITTED": {
+    "data": [
+      {
+        "id": "d1a538fd-2865-4177-b8ec-f98cd1159dfb",
+        "user_id": "27185e5b-137f-4f2a-b86a-f93fdb4749b3",
+        "title": "Landing page redesign",
+        "total_amount": "350.00",
+        "settled_amount": "200.00",
+        "unremitted_amount": "150.00",
+        "remittance_status": "UNREMITTED"
+      }
+    ],
+    "count": 1
+  },
+  "/api/v1/generate-remittances-for-all-users": {
+    "data": [
+      {
+        "id": "fbe65718-e493-4481-844e-e558fb9d6f8f",
+        "user_id": "27185e5b-137f-4f2a-b86a-f93fdb4749b3",
+        "status": "REMITTED",
+        "total_amount": "150.00",
+        "period_start": "2026-03-01",
+        "period_end": "2026-03-03",
+        "failure_reason": null,
+        "line_items": [
+          {
+            "worklog_id": "d1a538fd-2865-4177-b8ec-f98cd1159dfb",
+            "amount": "150.00"
+          }
+        ]
+      }
+    ],
+    "count": 1
+  }
+}
+
+
